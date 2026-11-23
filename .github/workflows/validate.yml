@@ -24,7 +24,7 @@ jobs:
 
       - name: Initialize & Validate Root Module
         run: |
-          terraform init -backend=false
+          terraform init -backend=false -upgrade
           terraform validate
 
       - name: Initialize & Validate Modules & Examples
@@ -32,6 +32,6 @@ jobs:
           for dir in modules/resource-group modules/storage-account examples/multi-environment-calling; do
             if [ -d "$dir" ]; then
               echo "Validating: $dir..."
-              (cd "$dir" && terraform init -backend=false && terraform validate)
+              (cd "$dir" && terraform init -backend=false -upgrade && terraform validate)
             fi
           done
